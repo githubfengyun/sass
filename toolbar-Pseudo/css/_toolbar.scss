@@ -1,0 +1,132 @@
+$toolbar-size:56px;
+.toolbar {
+    position: fixed;
+    left: 50%;
+    bottom: 5px;
+    margin-left: -$toolbar-size / 2;
+}
+
+.toolbar-item,
+.toolbar-btn:before,
+.toolbar-btn:after {
+    width: $toolbar-size;
+    height: $toolbar-size;
+}
+
+.toolbar-item {
+    display: block;
+    position: relative;
+    margin-top: 1px;
+    &:after {
+        content: "";
+        position: absolute;
+        right: $toolbar-size;
+        bottom: 0;
+        width: 160px;
+        height: 200px;
+        background: url("../img/toolbar_img.png") no-repeat;
+        opacity: 0;
+        @include transform-origin(right bottom);
+        @include transform(scale(0.01));
+        @include transition(all 1s);
+    }
+    &:hover {
+        .toolbar-btn {
+            &:before {
+                top: - $toolbar-size;
+            }
+            &:after {
+                top: 0;
+            }
+        }
+    }
+}
+
+.toolbar-item-weixin {
+    .toolbar-btn {
+        @extend .icon-wechat;
+        &:after {
+            content: "公众\A账号";
+        }
+    }
+    &:hover {
+        &:after {
+            opacity: 1;
+            @include transform(scale(1));
+            background-position: 0 0;
+            height: 200px;
+        }
+    }
+}
+
+.toolbar-item-feedback {
+    .toolbar-btn {
+        @extend .icon-chat-3;
+        &:after {
+            content: "意见\A反馈";
+        }
+    }
+}
+
+.toolbar-item-app {
+    .toolbar-btn {
+        @extend .icon-mobile;
+        &:after {
+            content: "App\A下载";
+        }
+    }
+    &:hover {
+        &:after {
+            opacity: 1;
+            @include transform(scale(1));
+            background-position: 0 -228px;
+            height: 180px;
+        }
+    }
+}
+
+.toolbar-item-download {
+    .toolbar-btn {
+        @extend .icon-vertical_align_top;
+        &:after {
+            content: "返回\A顶部";
+        }
+    }
+}
+
+.toolbar-btn {
+    &,
+    &:before,
+    &:after {
+        position: absolute;
+        left: 0;
+    }
+    &:before,
+    &:after {
+        content: "";
+        color: #fff;
+        text-align: center;
+        @include transition(top 1s);
+    }
+    @extend [class^="icon-"];
+    top:0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    &:before {
+        //icon
+        top: 0;
+        background-color: #d0d6d9;
+        font-size: 32px;
+        line-height: $toolbar-size;
+    }
+    &:after {
+        //text
+        top: $toolbar-size;
+        background-color: #a0a6a9;
+        padding-top: 12px;
+        font-size: 12px;
+        line-height: 1.2em;
+        white-space: pre;
+    }
+}
